@@ -3,6 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Alpha222cool</title>
+    <style>
+        center{
+            margin: 0;
+        }
+        .picbardivsty {
+            width: 1133px;
+            height: 275px;
+            background-color:red;
+            margin: 100px auto;
+        }
+        #pica {
+            /* display: block; */
+            float: left;
+            width: 220px;
+            height: 275px;
+            margin-right: 6.5px;
+            background-color: rgb(255, 255, 255);
+            transition: 0.5s;
+        }
+        a:hover{
+            transform: translateY(-30px);
+        }
+    </style>
     <link rel="stylesheet" href="css/dan.css"/>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
@@ -21,7 +44,28 @@
 <center>
 	<H1>Alpha too cool</H1>
 	<H4><a href="https://github.com/Alpha2Cool/">MyGitHub</a>
-	</H4>
+    </H4>
+    <div id="picbar">
+        <a id="pica" href="https://weibo.com/327485151" title="weibo">
+            <img src="images/pic1.jpg" alt="weibo">
+        </a>
+        <a id="pica" href="https://weibo.com/327485151" title="weibo">
+            <img src="images/pic2.jpg" alt="weibo">
+        </a>
+        <a id="pica" href="https://weibo.com/327485151" title="weibo">
+            <img src="images/pic3.jpg" alt="weibo">
+        </a>
+        <a id="pica" href="https://weibo.com/327485151" title="weibo">
+            <img src="images/pic4.jpg" alt="weibo">
+        </a>
+        <a id="pica" href="https://weibo.com/327485151" title="weibo">
+            <img src="images/pic5.jpg" alt="weibo">
+        </a>
+    </div>
+    <script>
+        var div = document.getElementById('picbar');
+        div.setAttribute("class", "picbardivsty");
+    </script>
 </center>
 
 <!--- ********************************************************************* -->
