@@ -1,6 +1,8 @@
 body{
     width: 600;
-    background-color: wheat;
+    background-image: url(../images/backgll.png);
+    background-repeat: no-repeat;
+    background-color:slategrey;
 }
 
 .githublink{
