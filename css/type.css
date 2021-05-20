@@ -1,6 +1,8 @@
 body{
     width: 600;
-    background-color: wheat;
+    background-image: url(../images/backg.gif);
+    background-repeat: no-repeat;
+    background-color:antiquewhite;
 }
 
 .githublink{
