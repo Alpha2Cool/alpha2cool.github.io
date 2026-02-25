@@ -1,6 +1,6 @@
 body{
-    width: 600;
-    background-image: url(../images/backg1.png);
+    width: 100%;
+    background-image: url(../images/backg.png);
     background-repeat: no-repeat;
     background-color: wheat;
 }

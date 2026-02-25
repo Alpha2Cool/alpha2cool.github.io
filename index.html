@@ -1,119 +1,825 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alpha too cool - 个人网站</title>
     <link rel="stylesheet" href="css/type.css">
-    <link rel="shortcuticon" href="images/favicon.ico" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <style>
+        /* 现代化样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            background-image: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: #007bff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #007bff;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/backg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: -70px;
+            padding-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: #0069d9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+        
+        /* 图片展示区 */
+        .gallery {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        /* 搜索区 */
+        .search-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .search-form {
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background-color: #0069d9;
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        /* 导航站点区 */
+        .navigation {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .nav-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: #007bff;
+        }
+        
+        .nav-card h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .nav-links-list {
+            list-style: none;
+        }
+        
+        .nav-links-list li {
+            margin-bottom: 10px;
+        }
+        
+        .nav-links-list a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links-list a:hover {
+            color: #007bff;
+        }
+        
+        /* 视频区 */
+        .video-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 统计区 */
+        .stats-section {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: #007bff;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 80px 0 40px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-section p,
+        .footer-section li {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #007bff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 40px;
+            text-align: center;
+            color: #ccc;
+        }
+        
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 14px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- title -->
-    <center>
-        <H1><font size="15" face="Palace Script MT">Alpha too cool</font></H1>
-        <H4><a class="githublink" href="https://github.com/Alpha2Cool/">MyGitHub</a></H4>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">Alpha too cool</a>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#gallery">相册</a></li>
+                <li><a href="#search">搜索</a></li>
+                <li><a href="#navigation">导航</a></li>
+                <li><a href="#video">视频</a></li>
+                <li><a href="#stats">统计</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Alpha too cool</h1>
+                <p>探索无限可能，享受美好生活</p>
+                <a href="#gallery" class="btn">开始探索</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 图片展示区 -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>精选相册</h2>
+                <p>记录生活中的美好瞬间</p>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="images/pic1.jpg" alt="图片1">
+                    <div class="gallery-overlay">
+                        <h3>美好回忆</h3>
+                        <p>珍贵的瞬间</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pic2.jpg" alt="图片2">
+                    <div class="gallery-overlay">
+                        <h3>自然风光</h3>
+                        <p>大自然的魅力</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pic3.jpg" alt="图片3">
+                    <div class="gallery-overlay">
+                        <h3>城市风光</h3>
+                        <p>都市的繁华</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pic4.jpg" alt="图片4">
+                    <div class="gallery-overlay">
+                        <h3>人文景观</h3>
+                        <p>文化的底蕴</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pic5.jpg" alt="图片5">
+                    <div class="gallery-overlay">
+                        <h3>创意摄影</h3>
+                        <p>艺术的表达</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 搜索区 -->
+    <section class="search-section" id="search">
+        <div class="container">
+            <div class="section-title">
+                <h2>Open Window And Breath</h2>
+                <p>搜索你想要的内容</p>
+            </div>
+            <div class="search-container">
+                <form onsubmit="return baiduWithHttps(this)" action="https://www.baidu.com/baidu" target="_blank">
+                    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w"> 
+                    <input class='search-input' type="text" onfocus="checkHttps" name="word" placeholder="请输入搜索内容">
+                    <input class='search-btn' type="submit" value="搜索">
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 导航站点区 -->
+    <section class="navigation" id="navigation">
+        <div class="container">
+            <div class="section-title">
+                <h2>导航站点</h2>
+                <p>常用网站链接</p>
+            </div>
+            <div class="nav-grid">
+                <div class="nav-card">
+                    <h3>搜索引擎</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://baidu.com/" target="_blank">Baidu</a></li>
+                        <li><a href="https://cn.bing.com/" target="_blank">Bing</a></li>
+                        <li><a href="https://www.google.com/" target="_blank">Google</a></li>
+                    </ul>
+                </div>
+                <div class="nav-card">
+                    <h3>邮箱服务</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://mail.qq.com/" target="_blank">mail.qq</a></li>
+                        <li><a href="https://mail.163.com/" target="_blank">mail.163</a></li>
+                    </ul>
+                </div>
+                <div class="nav-card">
+                    <h3>开发者工具</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+                        <li><a href="https://coding.net/" target="_blank">CODING</a></li>
+                        <li><a href="https://v2ex.com/" target="_blank">V2EX</a></li>
+                    </ul>
+                </div>
+                <div class="nav-card">
+                    <h3>学习资源</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://leetcode-cn.com/" target="_blank">LeetCode</a></li>
+                        <li><a href="https://www.nowcoder.com/" target="_blank">NowCoder</a></li>
+                        <li><a href="https://www.runoob.com/" target="_blank">Runoob</a></li>
+                    </ul>
+                </div>
+                <div class="nav-card">
+                    <h3>娱乐休闲</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+                        <li><a href="https://www.bilibili.com/" target="_blank">Bilibili</a></li>
+                        <li><a href="https://store.steampowered.com/" target="_blank">Steam</a></li>
+                    </ul>
+                </div>
+                <div class="nav-card">
+                    <h3>实用工具</h3>
+                    <ul class="nav-links-list">
+                        <li><a href="https://lanzou.com/" target="_blank">Lanzou</a></li>
+                        <li><a href="https://pan.baidu.com/" target="_blank">pan.baidu</a></li>
+                        <li><a href="https://translate.google.cn/" target="_blank">translate.google</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 视频区 -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-title">
+                <h2>Good Good Study, Day Day Up Up</h2>
+                <p>学习视频分享</p>
+            </div>
+            <div class="video-container">
+                <iframe width="100%" height="450" src="https://player.bilibili.com/player.html?aid=799350337&bvid=BV1cy4y1a7sh&cid=299835996&page=4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 统计区 -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="section-title">
+                <h2>网站统计</h2>
+                <p>访问数据</p>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" id="busuanzi_value_site_uv"></div>
+                    <div class="stat-label">访问人数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="busuanzi_value_site_pv"></div>
+                    <div class="stat-label">访问次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2024</div>
+                    <div class="stat-label">当前年份</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">常用站点</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>关于我</h3>
+                    <p>我是 R6pz，一个热爱生活、喜欢探索的人。这个网站是我记录生活、分享美好的地方。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#gallery">相册</a></li>
+                        <li><a href="#search">搜索</a></li>
+                        <li><a href="#navigation">导航</a></li>
+                        <li><a href="#video">视频</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我</h3>
+                    <ul>
+                        <li><a href="https://github.com/Alpha2Cool/" target="_blank">GitHub</a></li>
+                        <li>Email: example@example.com</li>
+                        <li>WeChat: example</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alpha too cool. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 脚本 -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
         
-        <!-- picture -->
-        <div class="picbar">
-            <a class="pica" href="https://github.com/Alpha2Cool/" title="weibo">
-                <img src="images/pic1.jpg" alt="weibo">
-            </a>
-            <a class="pica" href="https://github.com/Alpha2Cool/" title="weibo">
-                <img src="images/pic2.jpg" alt="weibo">
-            </a>
-            <a class="pica" href="https://github.com/Alpha2Cool/" title="weibo">
-                <img src="images/pic3.jpg" alt="weibo">
-            </a>
-            <a class="pica" href="https://github.com/Alpha2Cool/" title="weibo">
-                <img src="images/pic4.jpg" alt="weibo">
-            </a>
-            <a class="pica" href="https://github.com/Alpha2Cool/" title="weibo">
-                <img src="images/pic5.jpg" alt="weibo">
-            </a>
-        </div>
-    </center>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
         
-    <!-- search -->
-    <center>
-        <H2><font size="10" face="Palace Script MT">Open Window And Breath</font></H2>
-        <div class="searchdiv">
-            <form onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
-            <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w"> 
-            <input class='bdtext' type="text"  onfocus="checkHttps" name="word"  size="25" placeholder="Please input content.">
-            <input class='bdbtn' type="submit" value="Search">
-            </form>
-            <script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
-            <script>
-                function checkHttps () {
-                    BaiduHttps.useHttps();    
-                };
-                function baiduWithHttps (formname) {
-                    var data = BaiduHttps.useHttps();
-                    if (data.s === 0) {
-                        return true;
-                    }
-                    else {
-                        formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
-                        return true;
-                    }
-                };
-            </script> 
-        </div>
-    </center>
+        // 滚动动画
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        // 百度搜索 HTTPS
+        function checkHttps () {
+            if (typeof BaiduHttps !== 'undefined') {
+                BaiduHttps.useHttps();    
+            }
+        };
+        
+        function baiduWithHttps (formname) {
+            if (typeof BaiduHttps !== 'undefined') {
+                var data = BaiduHttps.useHttps();
+                if (data.s === 0) {
+                    return true;
+                }
+                else {
+                    formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
+                    return true;
+                }
+            }
+            return true;
+        };
+        
+        // 加载百度 HTTPS 脚本
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'https://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js';
+            script.async = true;
+            document.head.appendChild(script);
+        })();
+    </script>
     
-    <!-- Navigation Site -->
-    <center>
-        <H2><font size="10" face="Palace Script MT">Navigation Site</font></H2>
-        <div class="nav"> 
-            <H4><a href="https://baidu.com/">Baidu</a> | <a href="https://cn.bing.com/">Bing</a> | <a href="https://www.google.com//">Google</a> | <a href="https://mail.qq.com/">mail.qq</a> | <a href="https://mail.163.com/">mail.163</a> | <a href="https://github.com//">GitHub</a> | <a href="https://coding.net/">CODING</a> | <a href="https://v2ex.com/">V2EX</a> | <a href="https://weibo.com/">Weibo</a> | <a href="https://www.bilibili.com/">Bilibili</a><br>
-                <a href="https://lanzou.com/">Lanzou</a> | <a href="https://pan.baidu.com/">pan.baidu</a> | <a href="https://leetcode-cn.com/">LeetCode</a> | <a href="https://www.nowcoder.com/">NowCoder</a> | <a href="https://www.runoob.com/">Runoob</a> | <a href="https://translate.google.cn/">translate.google</a> | <a href="https://www.chsi.com.cn/cet/">CET46</a> | <a href="https://store.steampowered.com/">Steam</a> | <a href="https://www.wolframalpha.com/">wolframalpha</a> | <a href="https://www.taobao.com/">taobao</a><br>
-            </H4>
-        </div>
-    </center>
-    
-    <center>
-    <H2 id="publications"><font size="10" face="Palace Script MT">Good Good Study, Day Day Up Up</font></H2>
-    <div class="playerbar">
-        <!-- <div class="player"> -->
-            <iframe src="//player.bilibili.com/player.html?aid=799350337&bvid=BV1cy4y1a7sh&cid=299835996&page=4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-            <!--iframe src="//player.bilibili.com/player.html?aid=799350337&bvid=BV1cy4y1a7sh&cid=299830495&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=500414245&bvid=BV1kK411V7xr&cid=262465342&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=59962071&bvid=BV1qt411n7F1&cid=104430771&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=968311709&bvid=BV1up4y1X7cj&cid=194226630&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=710515989&bvid=BV1sQ4y1N7V9&cid=188478936&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-        <!-- </div> -->
-
-        <!-- <div class="player_right"> -->
-            <!--iframe src="//player.bilibili.com/player.html?aid=672900400&bvid=BV1BU4y1877N&cid=334943914&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=87192447&bvid=BV127411h7Bm&cid=148985154&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!--iframe src="//player.bilibili.com/player.html?aid=717556844&bvid=BV13Q4y117A8&cid=397079113&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe-->
-            <!-- <iframe src="//player.bilibili.com/player.html?aid=501148064&bvid=BV1VK411u7vy&cid=282062140&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
-        <!-- </div> -->
-    </div>
-    </center>
-    
-    <!-- access count -->
-    <center>
-        <span id="busuanzi_container_site_uv">
-            Ur No.<span id="busuanzi_value_site_uv"></span> Lovely Kittyヾ(o◕∀◕)ﾉ
-        </span>
-        <H4>Author: R6pz</a> </H4>	
-    </center>
-    
-        <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ?
-            "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost +
-            "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-            var pageTracker = _gat._getTracker("UA-3907502-1");
-            pageTracker._initData();
-            pageTracker._trackPageview();
-        </script>
-    
-    </body>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ?
+        "https://ssl." : "https://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost +
+        "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-3907502-1");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+    </script>
+</body>
 </html>
