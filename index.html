@@ -286,64 +286,7 @@
             margin-bottom: 10px;
         }
         
-        /* 搜索区 */
-        .search-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 100px 0;
-            background-color: #f8f9fa;
-        }
-        
-        .search-section .container {
-            width: 100%;
-        }
-        
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .search-form {
-            position: relative;
-            margin-top: 30px;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 50px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-        }
-        
-        .search-btn {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 10px 25px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .search-btn:hover {
-            background-color: #0069d9;
-            transform: translateY(-50%) scale(1.05);
-        }
+
         
         /* 导航站点区 */
         .navigation {
@@ -712,15 +655,7 @@
                 font-size: 10px;
             }
             
-            .search-input {
-                padding: 12px 15px;
-                font-size: 14px;
-            }
-            
-            .search-btn {
-                padding: 8px 20px;
-                font-size: 14px;
-            }
+
             
             .btn {
                 padding: 10px 25px;
@@ -751,7 +686,6 @@
             <ul class="nav-links">
                 <li><a href="#home">首页</a></li>
                 <li><a href="#gallery">相册</a></li>
-                <li><a href="#search">搜索</a></li>
                 <li><a href="#navigation">导航</a></li>
                 <li><a href="#video">视频</a></li>
                 <li><a href="#stats">统计</a></li>
@@ -817,22 +751,7 @@
         </div>
     </section>
     
-    <!-- 搜索区 -->
-    <section class="search-section" id="search">
-        <div class="container">
-            <div class="section-title">
-                <h2>Open Window And Breath</h2>
-                <p>搜索你想要的内容</p>
-            </div>
-            <div class="search-container">
-                <form onsubmit="return baiduWithHttps(this)" action="https://www.baidu.com/baidu" target="_blank">
-                    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w"> 
-                    <input class='search-input' type="text" onfocus="checkHttps" name="word" placeholder="请输入搜索内容">
-                    <input class='search-btn' type="submit" value="搜索">
-                </form>
-            </div>
-        </div>
-    </section>
+
     
     <!-- 导航站点区 -->
     <section class="navigation" id="navigation">
@@ -1010,34 +929,8 @@
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
         
-        // 百度搜索 HTTPS
-        function checkHttps () {
-            if (typeof BaiduHttps !== 'undefined') {
-                BaiduHttps.useHttps();    
-            }
-        };
-        
-        function baiduWithHttps (formname) {
-            if (typeof BaiduHttps !== 'undefined') {
-                var data = BaiduHttps.useHttps();
-                if (data.s === 0) {
-                    return true;
-                }
-                else {
-                    formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
-                    return true;
-                }
-            }
-            return true;
-        };
-        
-        // 加载百度 HTTPS 脚本
-        (function() {
-            var script = document.createElement('script');
-            script.src = 'https://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js';
-            script.async = true;
-            document.head.appendChild(script);
-        })();
+
+
     </script>
     
     <!-- Google Analytics -->
