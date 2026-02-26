@@ -914,16 +914,26 @@
         let isScrolling = false;
         let scrollInterval;
         
+        // 复制相册内容，实现无缝循环
+        const galleryItems = galleryContainer.children;
+        const itemsCount = galleryItems.length;
+        
+        // 克隆所有相册项并添加到容器末尾
+        for (let i = 0; i < itemsCount; i++) {
+            const clone = galleryItems[i].cloneNode(true);
+            galleryContainer.appendChild(clone);
+        }
+        
         // 自动滚动函数
         function autoScroll() {
             if (!isScrolling) {
                 scrollInterval = setInterval(() => {
-                    if (galleryContainer.scrollLeft >= galleryContainer.scrollWidth - galleryContainer.clientWidth - 10) {
-                        // 滚动到末尾时，平滑回到开始
-                        galleryContainer.scrollTo({ left: 0, behavior: 'smooth' });
-                    } else {
-                        // 正常滚动
-                        galleryContainer.scrollLeft += 1;
+                    // 正常滚动
+                    galleryContainer.scrollLeft += 1;
+                    
+                    // 当滚动到原始内容末尾时，无缝切换到开始位置
+                    if (galleryContainer.scrollLeft >= galleryContainer.scrollWidth / 2) {
+                        galleryContainer.scrollLeft = 0;
                     }
                 }, 30);
             }
