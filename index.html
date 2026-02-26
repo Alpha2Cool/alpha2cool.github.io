@@ -707,7 +707,7 @@
                 <h2>精选相册</h2>
                 <p>记录生活中的美好瞬间</p>
             </div>
-            <div class="gallery-container">
+            <div class="gallery-container" id="galleryContainer">
                 <div class="gallery-item">
                     <img src="images/pic1.jpg" alt="图片1">
                     <div class="gallery-overlay">
@@ -908,6 +908,64 @@
                 }
             });
         });
+        
+        // 精选相册自动循环滚动
+        const galleryContainer = document.getElementById('galleryContainer');
+        let isScrolling = false;
+        let scrollInterval;
+        
+        // 自动滚动函数
+        function autoScroll() {
+            if (!isScrolling) {
+                scrollInterval = setInterval(() => {
+                    if (galleryContainer.scrollLeft >= galleryContainer.scrollWidth - galleryContainer.clientWidth - 10) {
+                        // 滚动到末尾时，平滑回到开始
+                        galleryContainer.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        // 正常滚动
+                        galleryContainer.scrollLeft += 1;
+                    }
+                }, 30);
+            }
+        }
+        
+        // 停止自动滚动
+        function stopAutoScroll() {
+            clearInterval(scrollInterval);
+        }
+        
+        // 鼠标按下时停止自动滚动
+        galleryContainer.addEventListener('mousedown', () => {
+            isScrolling = true;
+            stopAutoScroll();
+        });
+        
+        // 鼠标松开时重新开始自动滚动
+        galleryContainer.addEventListener('mouseup', () => {
+            isScrolling = false;
+            autoScroll();
+        });
+        
+        // 鼠标离开时重新开始自动滚动
+        galleryContainer.addEventListener('mouseleave', () => {
+            isScrolling = false;
+            autoScroll();
+        });
+        
+        // 触摸开始时停止自动滚动
+        galleryContainer.addEventListener('touchstart', () => {
+            isScrolling = true;
+            stopAutoScroll();
+        });
+        
+        // 触摸结束时重新开始自动滚动
+        galleryContainer.addEventListener('touchend', () => {
+            isScrolling = false;
+            autoScroll();
+        });
+        
+        // 初始化自动滚动
+        autoScroll();
         
         // 滚动动画
         const fadeElements = document.querySelectorAll('.fade-in');
