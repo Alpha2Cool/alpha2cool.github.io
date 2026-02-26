@@ -956,6 +956,12 @@
             autoScroll();
         });
         
+        // 鼠标进入时停止自动滚动
+        galleryContainer.addEventListener('mouseenter', () => {
+            isScrolling = true;
+            stopAutoScroll();
+        });
+        
         // 鼠标离开时重新开始自动滚动
         galleryContainer.addEventListener('mouseleave', () => {
             isScrolling = false;
