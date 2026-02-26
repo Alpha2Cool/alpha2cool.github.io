@@ -375,11 +375,21 @@
         .nav-card {
             flex: 0 0 auto;
             width: 100px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
         }
         
         @media (min-width: 768px) {
             .nav-card {
                 width: 133px;
+                min-height: 220px;
             }
             
             .nav-grid {
@@ -390,6 +400,7 @@
         @media (min-width: 1200px) {
             .nav-card {
                 width: 167px;
+                min-height: 240px;
             }
             
             .nav-grid {
@@ -397,21 +408,13 @@
             }
         }
         
-        .nav-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
         .nav-links-list {
             list-style: none;
             margin-top: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .nav-card:hover {
