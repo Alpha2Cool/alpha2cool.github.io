@@ -8,7 +8,7 @@
     <title>Alpha too cool - 个人网站</title>
     <link rel="stylesheet" href="css/type.css">
     <link rel="shortcut icon" href="images/favicon.ico" />
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <style>
         /* 现代化样式 */
         * {
@@ -553,10 +553,12 @@
             
             .nav-links {
                 margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .nav-links li {
-                margin: 0 10px;
+                margin: 5px 10px;
             }
             
             .hero h1 {
@@ -568,11 +570,56 @@
             }
             
             .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
             }
             
             .section-title h2 {
                 font-size: 28px;
+            }
+            
+            .nav-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+            
+            .stat-item {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+            }
+            
+            .stat-label {
+                font-size: 12px;
+            }
+            
+            .video-container {
+                max-width: 100%;
+                margin: 0 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .footer-section p,
+            .footer-section li {
+                font-size: 12px;
+                margin-bottom: 5px;
             }
         }
         
@@ -590,7 +637,67 @@
             }
             
             .gallery-item img {
-                height: 200px;
+                height: 150px;
+            }
+            
+            .nav-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .nav-card {
+                padding: 15px;
+            }
+            
+            .nav-card h3 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 5px;
+            }
+            
+            .stat-item {
+                padding: 10px 5px;
+            }
+            
+            .stat-number {
+                font-size: 16px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+            }
+            
+            .search-input {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .search-btn {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .footer-section h3 {
+                font-size: 14px;
+            }
+            
+            .footer-section p,
+            .footer-section li {
+                font-size: 10px;
             }
         }
     </style>
@@ -733,14 +840,7 @@
                         <li><a href="https://store.steampowered.com/" target="_blank">Steam</a></li>
                     </ul>
                 </div>
-                <div class="nav-card">
-                    <h3>实用工具</h3>
-                    <ul class="nav-links-list">
-                        <li><a href="https://lanzou.com/" target="_blank">Lanzou</a></li>
-                        <li><a href="https://pan.baidu.com/" target="_blank">pan.baidu</a></li>
-                        <li><a href="https://translate.google.cn/" target="_blank">translate.google</a></li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </section>
@@ -775,7 +875,7 @@
                     <div class="stat-label">访问次数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">2024</div>
+                    <div class="stat-number" id="current-year"></div>
                     <div class="stat-label">当前年份</div>
                 </div>
                 <div class="stat-item">
@@ -902,6 +1002,24 @@
         var pageTracker = _gat._getTracker("UA-3907502-1");
         pageTracker._initData();
         pageTracker._trackPageview();
+    </script>
+    
+    <!-- 本地预览时模拟不蒜子统计 -->
+    <script type="text/javascript">
+        // 检查是否在本地文件系统中
+        if (window.location.protocol === 'file:') {
+            // 模拟不蒜子的功能
+            setTimeout(function() {
+                document.getElementById('busuanzi_value_site_uv').textContent = '1,234';
+                document.getElementById('busuanzi_value_site_pv').textContent = '5,678';
+            }, 500);
+        }
+        
+        // 自动获取当前年份
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year').textContent = currentYear;
+        });
     </script>
 </body>
 </html>
